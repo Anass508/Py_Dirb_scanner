@@ -54,7 +54,7 @@ def dirb(url) :
     # Initialisation des variable 
 
     path_wordlist=r".\wordlist_dirb.txt"
-    resultats = [] # Création du dictionnaire qui va contenir les resultat
+    resultats = [] # Création du tableau qui va contenir les resultat sous forme de dictionnaire
     url_test=""
 
     #Ouverture de la wordlist de dirb
