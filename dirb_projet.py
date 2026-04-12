@@ -53,7 +53,7 @@ def dirb(url) :
 
     # Initialisation des variable 
 
-    path_wordlist=r"C:\Users\anass\Downloads\important\projet\vrai projet\Github\Projet_Dirb\wordlist_dirb.txt"
+    path_wordlist=r".\wordlist_dirb.txt"
     resultats = [] # Création du dictionnaire qui va contenir les resultat
     url_test=""
 
