@@ -19,12 +19,12 @@ print("\n\n\n")
 
 def verifier_url(url):
     """
-    Cette fonction Vérifie le statut HTTP d'une URL donnée. .
+    Cette fonction Vérifie le statut HTTP d'une URL donnée . 
     
     url (chaine de caractère) : l'url donner par l'utilisateur + la partie a tester .
 
     # Variable requête
-            # Les Timeout : enleve le risque de bloqué si le serveur ne répond pas s. 
+            # Les Timeout : enleve le risque de bloqué si le serveur ne répond pas après n second . 
             # User-Agent : Simule un vrai utilisateur, évite le blocage de certaine site .
     
     Valeur retournée : None si erreur sur la requete 
@@ -43,7 +43,7 @@ def verifier_url(url):
 
 def dirb(url) : 
     """
-    Cette fonction se comporte comme la commande dirb. Permet la découvrir des répertoires  
+    Cette fonction se comporte comme la commande dirb. Permet la découvrir des répertoires .  
 
     url (chaine de caractère) : l'url donner par l'utilisateur .
 
@@ -51,13 +51,13 @@ def dirb(url) :
     
     """
 
-    # Initialisation des variable 
+    # Initialisation des variables 
 
     path_wordlist=r".\wordlist_dirb.txt"
     resultats = [] # Création du tableau qui va contenir les resultat sous forme de dictionnaire
     url_test=""
 
-    #Ouverture de la wordlist de dirb
+    # Ouverture de la wordlist de dirb
 
     f = open(path_wordlist,"r",encoding="utf-8")
     ligne=f.readline()
