@@ -21,7 +21,7 @@ Ce projet a été développé dans le cadre de mon apprentissage en cybersécuri
 
 Pour que le script puisse fonctionner correctement, il a besoin d'une liste de mots (wordlist) pour effectuer ses tests :
 
-1. Assurez-vous d'avoir un fichier nommé `wordlist_dirb.txt` situé à la racine du dossier de votre projet.
+1. Assurez-vous d'avoir un fichier nommé `wordlist_dirb.txt` situé à la racine du dossier du projet.
 2. Ce fichier doit contenir une liste de répertoires ou de fichiers, un par ligne.
 
 ##  Lancement
