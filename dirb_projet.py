@@ -1,5 +1,6 @@
 #Bibliothèque : 
 import requests 
+from concurrent.futures import ThreadPoolExecutor
 
 # Affichage graphique : 
 #  
@@ -61,22 +62,28 @@ def dirb(url) :
 
     f = open(path_wordlist,"r",encoding="utf-8")
     ligne=f.readline()
-    
-    while( ligne!="" ) : 
+    wordlist=[]
+
+    while( ligne!="" ) : # remplissage de la liste 
         
         url_test=url+ligne
         url_test=url_test.strip() # assemblage de l'url avec la partie contenue dans la wordlist
-        request = verifier_url(url_test) # appelle de la fonction vérifier_url pour faire notre teste
-        print(f"Test en cours : {url_test} ...", end="\r") 
-        
-        if (request != None ) : 
-            if (request==202 or request==403 or request==200) : 
-                resultats.append( { "URL" : url_test , "status" : request } )
+        wordlist.append(url_test)
+
         ligne=f.readline()
     
     f.close()
 
-    return resultats
+    nb_requet = 10 # Tu peux tester 5, 10 ou 20
+    with ThreadPoolExecutor(max_workers=nb_requet) as executor: #utiliser pour le multi-threading
+        reponses = list(executor.map(verifier_url, wordlist))
+
+        for i in range(len(wordlist)):
+            code = reponses[i]
+            if code in [200, 202, 403]:
+                resultats.append( { "URL" : wordlist[i], "status" : code } )
+
+        return resultats
 
 # Fonction Principale : 
 if __name__ == "__main__":
@@ -88,7 +95,7 @@ if __name__ == "__main__":
     if ( url[-1] !="/" ) : 
         url=url+"/"
     if ( len(url)==0) :
-        print("Erreur vous avez entrer une Url mauvaise ")
+        print("Erreur vous avez entrer une Url mauvaise : (vide) ")
 
 
     commande = dirb(url)
