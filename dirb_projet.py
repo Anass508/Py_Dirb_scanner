@@ -35,11 +35,11 @@ def verifier_url(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 
     try:
-        reponse = requests.head(url,headers=headers,timeout=3)  
-        return reponse.status_code
+        reponse = requests.get(url,headers=headers,timeout=3)  
+        return reponse.status_code, len(reponse.content)
     
     except requests.exceptions.RequestException: 
-        return None
+        return None,0
 
 
 def dirb(url) : 
@@ -79,9 +79,10 @@ def dirb(url) :
         reponses = list(executor.map(verifier_url, wordlist))
 
         for i in range(len(wordlist)):
-            code = reponses[i]
+            code,taille = reponses[i]
             if code in [200, 202, 403]:
-                resultats.append( { "URL" : wordlist[i], "status" : code } )
+                if (taille !=taille_erreur): # si différent du faux_positive renvoyer
+                    resultats.append( { "URL" : wordlist[i], "status" : code } )
 
         return resultats
 
@@ -90,6 +91,13 @@ if __name__ == "__main__":
      
 
     url=input("Veuillez entrer l'URL pour la commande dirb : ")
+
+    
+    #teste pour essayer de contrer les faux-positive  : 
+    faux_positive = url + "page_qui_n_existe_jamais_12345"
+    code_err, taille_erreur = verifier_url(faux_positive)
+    print(f"[*] Taille de la page d'erreur détectée : {taille_erreur} octets")    
+
 
     # teste l'intégrité de l'url :
     if ( url[-1] !="/" ) : 
